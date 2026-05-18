@@ -1,0 +1,94 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "debug_demo — Serve API",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "program": "${workspaceFolder}/node_modules/nx/bin/nx.js",
+      "args": ["serve", "api"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "debug_demo — Serve Web",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "program": "${workspaceFolder}/node_modules/nx/bin/nx.js",
+      "args": ["serve", "web", "--port=4201"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "debug_demo — Debug API (NestJS)",
+      "type": "node",
+      "request": "attach",
+      "port": 9230,
+      "restart": true,
+      "preLaunchTask": "debug_demo: nx serve api (debug)",
+      "cwd": "${workspaceFolder}",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
+      "outFiles": ["${workspaceFolder}/dist/apps/api/**/*.js"],
+      "sourceMapPathOverrides": {
+        "webpack:///./apps/api/src/*": "${workspaceFolder}/apps/api/src/*",
+        "webpack:///../../libs/*": "${workspaceFolder}/libs/*",
+        "webpack:///./libs/*": "${workspaceFolder}/libs/*",
+        "webpack:///./~/*": "${workspaceFolder}/node_modules/*",
+        "webpack:///./*": "${workspaceFolder}/*",
+        "webpack:///*": "${workspaceFolder}/*"
+      }
+    },
+    {
+      "name": "debug_demo — Debug Web (Angular)",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "debug_demo: nx serve web",
+      "url": "http://localhost:4201",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${webRoot}/*",
+        "/./*": "${webRoot}/*",
+        "/src/*": "${webRoot}/*",
+        "/*": "*",
+        "/./~/*": "${webRoot}/node_modules/*"
+      },
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "debug_demo — Attach API",
+      "type": "node",
+      "request": "attach",
+      "port": 9230,
+      "restart": true,
+      "cwd": "${workspaceFolder}",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "outFiles": ["${workspaceFolder}/dist/apps/api/**/*.js"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "debug_demo — Serve API + Web",
+      "configurations": ["debug_demo — Serve API", "debug_demo — Serve Web"],
+      "stopAll": true
+    },
+    {
+      "name": "debug_demo — Debug API + Web",
+      "configurations": [
+        "debug_demo — Debug API (NestJS)",
+        "debug_demo — Debug Web (Angular)"
+      ],
+      "stopAll": true,
+      "presentation": { "group": "debug_demo", "order": 1 }
+    }
+  ]
+}

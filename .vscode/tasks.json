@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "debug_demo: nx serve api",
+      "type": "shell",
+      "command": "npx nx serve api",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": { "regexp": "^.*$", "file": 1 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "(Application is running on|Nest application successfully started|Listening at|webpack compiled|Compiled successfully)"
+        }
+      },
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "debug_demo" }
+    },
+    {
+      "label": "debug_demo: nx serve api (debug)",
+      "type": "shell",
+      "command": "npx nx serve api --configuration=debug",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": { "regexp": "^.*$", "file": 1 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "(Application is running on|Nest application successfully started|Debugger listening|webpack compiled|Compiled successfully)"
+        }
+      },
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "debug_demo" }
+    },
+    {
+      "label": "debug_demo: nx serve web",
+      "type": "shell",
+      "command": "npx nx serve web --port=4201",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": { "regexp": "^.*$", "file": 1 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "(Application bundle generation complete|Local:|Compiled successfully)"
+        }
+      },
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated", "group": "debug_demo" }
+    }
+  ]
+}

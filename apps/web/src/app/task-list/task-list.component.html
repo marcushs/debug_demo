@@ -1,0 +1,70 @@
+<section class="page">
+  <header>
+    <h1>Task workshop</h1>
+    <p>CRUD demo for debugger training. Change a task priority to trigger the backend bug.</p>
+  </header>
+
+  @if (error()) {
+    <p class="error" role="alert">{{ error() }}</p>
+  }
+
+  <form class="card" (ngSubmit)="createTask()">
+    <h2>New task</h2>
+    <label>
+      Title
+      <input name="title" [(ngModel)]="newTitle" required />
+    </label>
+    <label>
+      Description
+      <input name="description" [(ngModel)]="newDescription" />
+    </label>
+    <button type="submit">Add task</button>
+  </form>
+
+  @if (loading()) {
+    <p>Loading…</p>
+  } @else {
+    <table class="card">
+      <thead>
+        <tr>
+          <th>Priority</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Done</th>
+          <th>Move to priority</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (task of tasks(); track task.id) {
+          <tr>
+            <td>{{ task.priority }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>
+              <input
+                type="checkbox"
+                [checked]="task.completed"
+                (change)="toggleCompleted(task)"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                min="1"
+                [value]="task.priority"
+                #priorityInput
+              />
+              <button type="button" (click)="changePriority(task, +priorityInput.value)">
+                Apply
+              </button>
+            </td>
+            <td>
+              <button type="button" class="danger" (click)="deleteTask(task.id)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>

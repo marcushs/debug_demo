@@ -1,0 +1,100 @@
+{
+  "folders": [
+    {
+      "name": "debug_demo",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "node_modules/typescript/lib"
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "debug_demo — Debug API (NestJS)",
+        "type": "node",
+        "request": "attach",
+        "port": 9230,
+        "restart": true,
+        "preLaunchTask": "debug_demo: nx serve api (debug)",
+        "cwd": "${workspaceFolder}",
+        "skipFiles": ["<node_internals>/**"],
+        "sourceMaps": true,
+        "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
+        "outFiles": ["${workspaceFolder}/dist/apps/api/**/*.js"],
+        "sourceMapPathOverrides": {
+          "webpack:///./apps/api/src/*": "${workspaceFolder}/apps/api/src/*",
+          "webpack:///../../libs/*": "${workspaceFolder}/libs/*",
+          "webpack:///./libs/*": "${workspaceFolder}/libs/*",
+          "webpack:///./*": "${workspaceFolder}/*",
+          "webpack:///*": "${workspaceFolder}/*"
+        }
+      },
+      {
+        "name": "debug_demo — Debug Web (Angular)",
+        "type": "chrome",
+        "request": "launch",
+        "preLaunchTask": "debug_demo: nx serve web",
+        "url": "http://localhost:4201",
+        "webRoot": "${workspaceFolder}",
+        "sourceMaps": true,
+        "sourceMapPathOverrides": {
+          "webpack:/*": "${webRoot}/*",
+          "/./*": "${webRoot}/*",
+          "/src/*": "${webRoot}/*"
+        },
+        "skipFiles": ["<node_internals>/**"]
+      }
+    ],
+    "compounds": [
+      {
+        "name": "debug_demo — Debug API + Web",
+        "configurations": [
+          "debug_demo — Debug API (NestJS)",
+          "debug_demo — Debug Web (Angular)"
+        ],
+        "stopAll": true
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "debug_demo: nx serve api (debug)",
+        "type": "shell",
+        "command": "npx nx serve api --configuration=debug",
+        "options": { "cwd": "${workspaceFolder}" },
+        "problemMatcher": {
+          "owner": "typescript",
+          "pattern": { "regexp": "^.*$", "file": 1 },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*",
+            "endsPattern": "(Application is running on|Nest application successfully started|Debugger listening|webpack compiled|Compiled successfully)"
+          }
+        },
+        "isBackground": true,
+        "presentation": { "reveal": "always", "panel": "dedicated" }
+      },
+      {
+        "label": "debug_demo: nx serve web",
+        "type": "shell",
+        "command": "npx nx serve web --port=4201",
+        "options": { "cwd": "${workspaceFolder}" },
+        "problemMatcher": {
+          "owner": "typescript",
+          "pattern": { "regexp": "^.*$", "file": 1 },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".*",
+            "endsPattern": "(Application bundle generation complete|Local:|Compiled successfully)"
+          }
+        },
+        "isBackground": true,
+        "presentation": { "reveal": "always", "panel": "dedicated" }
+      }
+    ]
+  }
+}

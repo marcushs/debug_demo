@@ -1,0 +1,11 @@
+export { TaskModule } from './lib/task.module';
+export { CreateOneTaskCommand } from './lib/create-one-task.command';
+export { DeleteOneTaskCommand } from './lib/delete-one-task.command';
+export { GetManyTasksQuery } from './lib/get-many-tasks.query';
+export { GetOneTaskQuery } from './lib/get-one-task.query';
+export { UpdateOneTaskCommand } from './lib/update-one-task.command';
+export { UpdateTaskPriorityUC } from './lib/update-task-priority.uc';
+export type { IUpdateTaskPriorityUC } from './lib/contract/update-task-priority.uc.port';
+export { GetManyTasksQueryInMemory } from './lib/inmemory/get-many-tasks.query.inmemory';
+export { SaveAllTasksCommandInMemory } from './lib/inmemory/save-all-tasks.command.inmemory';
+export { resetTaskInMemoryStore, taskInMemoryStore } from './lib/inmemory/task.inmemory-store';

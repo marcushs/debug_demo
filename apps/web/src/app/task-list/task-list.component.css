@@ -1,0 +1,59 @@
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: system-ui, sans-serif;
+}
+
+header {
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+form.card label {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+form.card input {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.error {
+  color: #b91c1c;
+  background: #fef2f2;
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+button {
+  margin-right: 0.25rem;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+}
+
+button.danger {
+  color: #b91c1c;
+}

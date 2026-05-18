@@ -1,0 +1,27 @@
+{
+  "name": "task",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/task/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/api/task",
+        "main": "libs/api/task/src/index.ts",
+        "tsConfig": "libs/api/task/tsconfig.lib.json",
+        "assets": ["libs/api/task/*.md"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/api/task"],
+      "options": {
+        "jestConfig": "libs/api/task/jest.config.ts",
+        "passWithNoTests": false
+      }
+    }
+  }
+}
