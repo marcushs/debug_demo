@@ -24,7 +24,10 @@ export class UpdateTaskPriorityUC implements IUpdateTaskPriorityUC {
 
     const working = tasks.map(task => ({ ...task }));
     working[movedIndex].priority = priority;
-    working.sort((a, b) => a.priority - b.priority);
+    working.sort((a, b) => {
+      if (a.priority !== b.priority) return a.priority - b.priority;
+      return a.id === id ? -1 : b.id === id ? 1 : 0;
+    });
 
     for (let i = 0; i < working.length; i++) {
       for (let j = i + 1; j < working.length; j++) {
