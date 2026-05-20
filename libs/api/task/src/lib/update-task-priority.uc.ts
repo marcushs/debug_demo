@@ -22,11 +22,16 @@ export class UpdateTaskPriorityUC implements IUpdateTaskPriorityUC {
       throw new NotFoundException(`Task ${id} not found`);
     }
 
+    const oldPriority = tasks[movedIndex].priority;
+    const movingDown = priority > oldPriority;
+
     const working = tasks.map(task => ({ ...task }));
     working[movedIndex].priority = priority;
     working.sort((a, b) => {
       if (a.priority !== b.priority) return a.priority - b.priority;
-      return a.id === id ? -1 : b.id === id ? 1 : 0;
+      if (a.id === id) return movingDown ? 1 : -1;
+      if (b.id === id) return movingDown ? -1 : 1;
+      return 0;
     });
 
     for (let i = 0; i < working.length; i++) {

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:api": "nx serve api",
+    "start:api": "nx daemon --start && nx serve api",
     "start:web": "nx serve web"
   },
   "private": true,

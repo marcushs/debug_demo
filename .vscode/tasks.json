@@ -2,7 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "debug_demo: nx daemon",
+      "type": "shell",
+      "command": "npx nx daemon --start",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": { "reveal": "silent", "panel": "shared", "group": "debug_demo" }
+    },
+    {
       "label": "debug_demo: nx serve api",
+      "dependsOn": ["debug_demo: nx daemon"],
       "type": "shell",
       "command": "npx nx serve api",
       "options": { "cwd": "${workspaceFolder}" },
@@ -20,6 +28,7 @@
     },
     {
       "label": "debug_demo: nx serve api (debug)",
+      "dependsOn": ["debug_demo: nx daemon"],
       "type": "shell",
       "command": "npx nx serve api --configuration=debug",
       "options": { "cwd": "${workspaceFolder}" },

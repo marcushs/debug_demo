@@ -5,6 +5,7 @@
       "name": "debug_demo — Serve API",
       "type": "node",
       "request": "launch",
+      "preLaunchTask": "debug_demo: nx daemon",
       "runtimeExecutable": "node",
       "program": "${workspaceFolder}/node_modules/nx/bin/nx.js",
       "args": ["serve", "api"],

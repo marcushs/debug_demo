@@ -5,15 +5,31 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "nx:run-commands",
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "command": "webpack-cli build",
-        "args": ["--node-env=production"],
-        "cwd": "apps/api"
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/api",
+        "main": "apps/api/src/main.ts",
+        "tsConfig": "apps/api/tsconfig.app.json",
+        "assets": ["apps/api/src/assets"],
+        "webpackConfig": "apps/api/webpack.config.js",
+        "buildLibsFromSource": true,
+        "generatePackageJson": true,
+        "sourceMap": true,
+        "optimization": false,
+        "outputHashing": "none"
       },
       "configurations": {
         "development": {
-          "args": ["--node-env=development"]
+          "optimization": false,
+          "outputHashing": "none",
+          "generatePackageJson": false
+        },
+        "production": {
+          "optimization": true
         }
       }
     },
@@ -46,10 +62,12 @@
       "continuous": true,
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
       "options": {
         "buildTarget": "api:build",
-        "runBuildTargetDependencies": false
+        "runBuildTargetDependencies": true,
+        "watch": true,
+        "debounce": 500,
+        "inspect": false
       },
       "configurations": {
         "development": {
@@ -61,7 +79,8 @@
         "debug": {
           "buildTarget": "api:build:development",
           "inspect": "inspect",
-          "port": 9230
+          "port": 9230,
+          "watch": true
         }
       }
     }
